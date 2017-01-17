@@ -1,3 +1,5 @@
 module.exports={
-  port:***
+  port:***,
+  secret:***,
+  url:***
 }

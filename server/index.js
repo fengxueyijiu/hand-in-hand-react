@@ -5,6 +5,10 @@ var url = require('./config').url;
 var User = require('./models/user');
 var routes = require('./routes');
 var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+var morgan = require('morgan');
+app.use(morgan('dev'));
 var mongoose = require('mongoose');
 mongoose.connect(url);
 var db= mongoose.connection;
@@ -19,10 +23,7 @@ db.once('open',function(){
   });
   user.save();
 });
-
-app.get('/api',function(req,res){
-  res.send('api works')
-})
+routes(app);
 
 app.listen(port,function(){
   console.log("running on port "+port+" ....")
