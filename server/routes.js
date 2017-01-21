@@ -9,6 +9,8 @@ var generateToken = function(user){
 module.exports = function(app){
   app.post('/auth/login',function(req,res){
     User.findOne({username:req.body.username},function(err,user){
+      console.log(user)
+      if(!user){return res.status(403).json({error:'用户名不存在'})}
       user.comparePassword(req.body.password,function(err,isMatch){
         if(!isMatch){
           return res.status(403).json({error:'密码错误'})

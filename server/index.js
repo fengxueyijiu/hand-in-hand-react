@@ -9,6 +9,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 var morgan = require('morgan');
 app.use(morgan('dev'));
+var cors = require('cors');
+app.use(cors())
+
 var mongoose = require('mongoose');
 mongoose.connect(url);
 var db= mongoose.connection;
